@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PACS Brain Teaser Chat – Carter & Conner</title>
+  <style>
+    :root {
+      --navy: #1a2456;
+      --navy-soft: #24316a;
+      --purple-light: #e3d8ff;
+      --purple-accent: #b39dff;
+      --bg: #f4f5fb;
+      --text-main: #222222;
+      --text-muted: #555555;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #f0ecff, var(--bg));
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .game-shell {
+      max-width: 900px;
+      width: 100%;
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+      border-top: 6px solid var(--navy);
+      border-left: 4px solid var(--purple-accent);
+      display: flex;
+      overflow: hidden;
+    }
+
+    @media (max-width: 720px) {
+      .game-shell {
+        flex-direction: column;
+      }
+    }
+
+    /* Left panel: PACS branding / description */
+    .side-panel {
+      background: linear-gradient(
+        160deg,
+        var(--navy),
+        var(--navy-soft),
+        #141936
+      );
+      color: var(--purple-light);
+      padding: 24px;
+      width: 35%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    @media (max-width: 720px) {
+      .side-panel {
+        width: 100%;
+      }
+    }
+
+    .brand-header {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+
+    .logo-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(243, 241, 255, 0.08);
+      border: 1px solid rgba(227, 216, 255, 0.35);
+    }
+
+    .logo-mark {
+      width: 22px;
+      height: 22px;
+      border-radius: 8px;
+      background: radial-gradient(circle at 20% 20%, #ffffff, #b39dff);
+      box-shadow: 0 0 0 2px rgba(243, 241, 255, 0.85);
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .logo-text-main {
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .logo-text-sub {
+      font-size: 0.7rem;
+      color: #d2cfff;
+    }
+
+    .side-panel h1 {
+      font-size: 1.2rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .side-subtitle {
+      font-size: 0.85rem;
+      color: #eae7ff;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .side-panel p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #d8d5ff;
+      margin-top: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(227, 216, 255, 0.5);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #66ffba;
+    }
+
+    .side-footer {
+      font-size: 0.78rem;
+      color: #b9b5ff;
+    }
+
+    /* Right panel: game */
+    .game-panel {
+      width: 65%;
+      padding: 24px 28px 28px;
+      background: linear-gradient(
+          135deg,
+          rgba(227, 216, 255, 0.4),
+          transparent
+        ),
+        var(--bg);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    @media (max-width: 720px) {
+      .game-panel {
+        width: 100%;
+      }
+    }
+
+    .round-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .round-pill {
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--purple-light);
+      color: var(--navy-soft);
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(26, 36, 86, 0.12);
+      margin-left: 12px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(
+        to right,
+        var(--purple-accent),
+        var(--navy-soft)
+      );
+      transition: width 0.35s ease;
+    }
+
+    .chat-window {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 12px;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(26, 36, 86, 0.08);
+    }
+
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .chat-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--navy-soft);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .chat-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .bubble-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--navy-soft), var(--purple-accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #f9f8ff;
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    .bubble {
+      max-width: 100%;
+      padding: 10px 12px;
+      border-radius: 16px 16px 16px 4px;
+      background: var(--purple-light);
+      color: var(--navy);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    .bubble-speaker {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .bubble-answer {
+      align-self: flex-end;
+      margin-top: 10px;
+    }
+
+    .bubble-answer-inner {
+      max-width: 100%;
+      padding: 9px 11px;
+      border-radius: 16px 16px 4px 16px;
+      background: var(--navy-soft);
+      color: #f7f5ff;
+      font-size: 0.9rem;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+    }
+
+    .bubble-answer-inner strong {
+      color: var(--purple-accent);
+      font-weight: 600;
+    }
+
+    .game-controls {
+      margin-top: 4px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .buttons-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 0.87rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: transform 0.08s ease, box-shadow 0.08s ease,
+        background 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(
+        135deg,
+        var(--navy-soft),
+        var(--navy)
+      );
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(26, 36, 86, 0.35);
+    }
+
+    .btn-primary:hover:enabled {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(26, 36, 86, 0.45);
+    }
+
+    .btn-secondary {
+      background: var(--purple-light);
+      color: var(--navy-soft);
+      border: 1px solid rgba(36, 49, 106, 0.2);
+    }
+
+    .btn-secondary:hover:enabled {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(36, 49, 106, 0.15);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: default;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .status-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      max-width: 220px;
+      text-align: right;
+    }
+
+    .status-highlight {
+      color: var(--navy-soft);
+      font-weight: 600;
+    }
+
+    .finished {
+      font-size: 0.9rem;
+      color: var(--navy-soft);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-shell">
+    <aside class="side-panel">
+      <div>
+        <div class="brand-header">
+          <div class="logo-card">
+            <div class="logo-mark"></div>
+            <div class="logo-text">
+              <span class="logo-text-main">PACS Healthcare</span>
+              <span class="logo-text-sub">Talent &amp; Leadership</span>
+            </div>
+          </div>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span>Brain Teaser Mode</span>
+          </div>
+        </div>
+
+        <h1>PACS Brain Teasers</h1>
+        <div class="side-subtitle">Intern Brain Warm-Up</div>
+        <p>
+          Test your brain with 5 quick puzzles delivered as messages from PACS
+          Healthcare recruiters <strong>Carter</strong> and <strong>Conner</strong>.
+          Reveal the answer, then move on to the next challenge—perfect for
+          warming up before an interview or a work session.
+        </p>
+      </div>
+      <div class="side-footer">
+        Tip: Try to solve each teaser in your head <em>before</em> clicking
+        <strong>Reveal Answer</strong>. See how many you can get in a row.
+      </div>
+    </aside>
+
+    <main class="game-panel">
+      <div class="round-info">
+        <div class="round-pill" id="round-label">Round 1 of 5</div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="chat-window">
+        <div class="chat-header">
+          <div class="chat-title">Recruiter Chat</div>
+          <div class="chat-subtitle" id="speaker-subtitle">
+            Carter is typing a brain teaser…
+          </div>
+        </div>
+
+        <div class="bubble-row">
+          <div class="avatar" id="avatar">
+            C
+          </div>
+          <div class="bubble">
+            <div class="bubble-speaker" id="bubble-speaker">Carter</div>
+            <div id="question-text">
+              Loading your first brain teaser…
+            </div>
+          </div>
+        </div>
+
+        <div class="bubble-answer" id="answer-container" style="display: none;">
+          <div class="bubble-answer-inner">
+            <strong>Answer:</strong>
+            <span id="answer-text"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-controls">
+        <div class="buttons-group">
+          <button class="btn-secondary" id="reveal-btn">Reveal Answer</button>
+          <button class="btn-primary" id="next-btn">Next Teaser</button>
+        </div>
+        <div class="status-text" id="status-text">
+          Try to solve it in your head first.
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Brain teasers data
+    const teasers = [
+      {
+        question:
+          "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?",
+        answer: "An echo."
+      },
+      {
+        question:
+          "I’m taken from a mine and shut up in a wooden case, from which I’m never released, and yet I’m used by almost everyone. What am I?",
+        answer: "Pencil lead (graphite)."
+      },
+      {
+        question:
+          "You see a boat filled with people, yet there isn’t a single person on board. How is that possible?",
+        answer: "All the people on the boat are married."
+      },
+      {
+        question:
+          "What 3-letter word can change a pan into a different word when you add two letters in front of it and two letters behind it, but the 3-letter word itself never changes?",
+        answer:
+          "The word is 'pan' itself. You can add letters around it to form new words (like 'span', 'pans', etc.), but 'pan' stays in the middle."
+      },
+      {
+        question:
+          "A doctor gives you three pills and tells you to take one every 30 minutes. How long will the pills last?",
+        answer: "1 hour. You take the first pill now, the second in 30 minutes, and the third in 60 minutes."
+      }
+    ];
+
+    const speakers = ["Carter", "Conner"];
+
+    let currentIndex = 0;
+    let currentSpeaker = speakers[0];
+
+    const roundLabel = document.getElementById("round-label");
+    const progressFill = document.getElementById("progress-fill");
+    const speakerSubtitle = document.getElementById("speaker-subtitle");
+    const avatar = document.getElementById("avatar");
+    const bubbleSpeaker = document.getElementById("bubble-speaker");
+    const questionText = document.getElementById("question-text");
+    const answerContainer = document.getElementById("answer-container");
+    const answerText = document.getElementById("answer-text");
+    const revealBtn = document.getElementById("reveal-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const statusText = document.getElementById("status-text");
+
+    function chooseSpeaker() {
+      // Alternate speakers for fun
+      return speakers[currentIndex % speakers.length];
+    }
+
+    function loadTeaser(index) {
+      const teaser = teasers[index];
+      currentSpeaker = chooseSpeaker();
+
+      // Update round label
+      roundLabel.textContent = `Round ${index + 1} of ${teasers.length}`;
+
+      // Update progress bar
+      const progressPercent = (index / teasers.length) * 100;
+      progressFill.style.width = progressPercent + "%";
+
+      // Update chat texts
+      questionText.textContent = teaser.question;
+      answerText.textContent = teaser.answer;
+      bubbleSpeaker.textContent = currentSpeaker;
+      speakerSubtitle.textContent = `${currentSpeaker} is sending you a brain teaser…`;
+
+      // Avatar initial + gradient variation
+      avatar.textContent = currentSpeaker.charAt(0);
+      if (currentSpeaker === "Carter") {
+        avatar.style.background =
+          "linear-gradient(145deg, #24316a, #b39dff)";
+      } else {
+        avatar.style.background =
+          "linear-gradient(145deg, #b39dff, #24316a)";
+      }
+
+      // Hide answer on load
+      answerContainer.style.display = "none";
+      statusText.innerHTML = `Guess the answer, then click <span class="status-highlight">Reveal Answer</span>.`;
+
+      // Enable buttons
+      revealBtn.disabled = false;
+      nextBtn.disabled = false;
+    }
+
+    function revealAnswer() {
+      answerContainer.style.display = "flex";
+      statusText.innerHTML = `Nice work. Ready for the next one?`;
+    }
+
+    function nextTeaser() {
+      if (currentIndex < teasers.length - 1) {
+        currentIndex++;
+        loadTeaser(currentIndex);
+      } else {
+        // Finished all teasers
+        progressFill.style.width = "100%";
+        statusText.innerHTML =
+          `<span class="finished">You’ve completed all ${teasers.length} brain teasers. Carter &amp; Conner are impressed.</span>`;
+        revealBtn.disabled = true;
+        nextBtn.disabled = true;
+
+        questionText.textContent =
+          "All done! Want to go again? Refresh the page to restart the game.";
+        answerContainer.style.display = "none";
+        speakerSubtitle.textContent = "Session complete.";
+      }
+    }
+
+    // Event listeners
+    revealBtn.addEventListener("click", revealAnswer);
+    nextBtn.addEventListener("click", nextTeaser);
+
+    // Initialize first teaser
+    loadTeaser(currentIndex);
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+body{
+    background-color: black;
+    color:burlywood
+}
+h1{
+    font: size 36px;
+    color:antiquewhite;
+    text-align: center;
+}
+h2{
+    color:blue;
+    text-decoration: underline;
+    font-style: italic;
+    font-size: x-large;
+}
+p{
+    font: size 25px;
+}
+
+#pink{
+    color: pink;
+}
+
+.common{
+    background-color: brown;
+    border: 2px solid white;
+    position: absolute;
+}
+
+.left{
+    top: 115px;
+    left: 15px;
+    width: 100px;
+    bottom: 40px;
+}
+
+.main{
+    top: 115px;
+    left: 130px;
+    right: 140px;
+    bottom: 40px;
+}
+
+.right{
+    top:115px;
+    right: 25px;
+    width: 500px;
+    height: 100px;
+}
+
+.footer{
+    bottom: 39px;
+    height: 75px;
+    left: 15px;
+    right:25px;
+    position: fixed;
+    background-color: brown;
+    border: 2px solid white;
+}
+
+.header{
+    z-index: 10;
+}

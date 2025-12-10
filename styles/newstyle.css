@@ -1,0 +1,15 @@
+body{
+    background-color: lightblue;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align: center;
+
+}
+h2{
+    text-decoration: underline;
+    color: navy;
+    text-align: center;
+}
+h3{
+    color: darkred;
+    text-align: center;
+}

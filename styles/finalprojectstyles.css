@@ -1,0 +1,30 @@
+body{
+    background-color: rgba(157, 98, 157, 0.41);
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.top{
+    font-size: 75px;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(0, 0, 0);
+}
+.center{
+    text-align: center;
+}
+.box1{
+    border-style: solid;
+    border-width: 5px;
+}
+.textwidth{
+    margin-left: 20px;
+    width: 1200px;
+}
+.big{
+    font-style: italic;
+    font-size: large;
+}
+.underline{
+    text-decoration: underline;
+}

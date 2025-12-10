@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <a href="#vid">Home</a>  |
+    <a href="#best">My Resume</a>  |
+    <a href="#further">Game</a><br>
+  <meta charset="UTF-8" />
+  <title>Werner M. Hoppe – Resume</title>
+  <style>
+    :root {
+      --navy: #1a2456;
+      --navy-soft: #24316a;
+      --purple-light: #e3d8ff;
+      --purple-accent: #b39dff;
+      --bg: #f4f5fb;
+      --text-main: #222222;
+      --text-muted: #555555;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 40px 16px;
+    }
+
+    .resume {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 32px 40px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+      border-top: 6px solid var(--navy);
+      border-left: 4px solid var(--purple-accent);
+    }
+
+    @media (max-width: 600px) {
+      .resume {
+        padding: 24px 20px;
+      }
+    }
+
+    /* Header */
+    .header {
+      border-bottom: 2px solid var(--purple-light);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+
+    .name {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--navy);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .contact span::before {
+      content: "•";
+      margin: 0 8px;
+      color: var(--purple-accent);
+    }
+
+    .contact span:first-child::before {
+      content: "";
+      margin: 0;
+    }
+
+    a {
+      color: var(--navy-soft);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Sections */
+    .section {
+      margin-top: 20px;
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 8px;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 42px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(
+        to right,
+        var(--purple-accent),
+        var(--navy-soft)
+      );
+    }
+
+    .section-body {
+      margin-top: 10px;
+      font-size: 0.97rem;
+    }
+
+    /* Entries */
+    .item {
+      margin-bottom: 14px;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      font-size: 0.98rem;
+    }
+
+    .item-left {
+      font-weight: 600;
+      color: var(--navy-soft);
+    }
+
+    .item-right {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .item-sub {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      margin-bottom: 4px;
+    }
+
+    .item-sub-left {
+      font-style: italic;
+    }
+
+    .item-sub-right {
+      white-space: nowrap;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 4px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    /* Small accent pills (e.g., GPA) */
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--purple-light);
+      color: var(--navy-soft);
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* Skills list */
+    .skills-list {
+      list-style: none;
+      column-count: 2;
+      column-gap: 24px;
+      padding-left: 0;
+      margin-top: 6px;
+    }
+
+    .skills-list li {
+      position: relative;
+      padding-left: 14px;
+      margin-bottom: 4px;
+    }
+
+    .skills-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--purple-accent);
+    }
+
+    @media (max-width: 600px) {
+      .item-header,
+      .item-sub {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .item-right,
+      .item-sub-right {
+        white-space: normal;
+      }
+
+      .skills-list {
+        column-count: 1;
+      }
+    }
+
+    /* Print tweaks */
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+      .resume {
+        box-shadow: none;
+        border-radius: 0;
+        border: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="resume">
+    <header class="header">
+      <div class="name">Werner M. Hoppe</div>
+      <div class="contact">
+        <span>(801) 675-2030</span>
+        <span><a href="mailto:whoppe@byu.edu">whoppe@byu.edu</a></span>
+        <span>194 W Silver Springs Dr, Vineyard, UT 84059</span>
+      </div>
+    </header>
+
+    <!-- EDUCATION -->
+    <section class="section">
+      <h2 class="section-title">Education</h2>
+      <div class="section-body">
+        <div class="item">
+          <div class="item-header">
+            <div class="item-left">
+              Brigham Young University – Marriott School of Business
+            </div>
+            <div class="item-right">Provo, UT</div>
+          </div>
+          <div class="item-sub">
+            <div class="item-sub-left">
+              Bachelor of Science in Pre-Business, Minor in Healthcare Leadership
+            </div>
+            <div class="item-sub-right">Jun 2027</div>
+          </div>
+          <div class="pill">GPA 3.5 / 4.00</div>
+          <ul>
+            <li>
+              Assistant Program Director for Adopt-a-Grandparent under BYU’s
+              Y-Serve initiative
+            </li>
+            <li>Incoming Ambassador for Healthcare Leadership Association</li>
+            <li>
+              Member of BYU Real Estate Association &amp; Strategic Consulting
+              Association
+            </li>
+            <li>
+              Awarded Dean’s List for Winter Semester 2025, for academic
+              excellence
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section">
+      <h2 class="section-title">Experience</h2>
+      <div class="section-body">
+        <div class="item">
+          <div class="item-header">
+            <div class="item-left">BYU Real Estate Case Competition</div>
+            <div class="item-right">Provo, UT</div>
+          </div>
+          <div class="item-sub">
+            <div class="item-sub-left">Team Member</div>
+            <div class="item-sub-right">Oct 2025</div>
+          </div>
+          <ul>
+            <li>
+              Conducted underwriting of a 274-unit multifamily development model
+              in Baton Rouge, Louisiana for $34.5M
+            </li>
+            <li>
+              Calculated an average cash-on-cash return of 8%, an equity
+              multiple of 1.5x, and an IRR of 15%
+            </li>
+            <li>
+              Projected increased rental income and NOI by analyzing market
+              trends and cutting controllable expenses
+            </li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <div class="item-left">Onarock Investments</div>
+            <div class="item-right">Provo, UT</div>
+          </div>
+          <div class="item-sub">
+            <div class="item-sub-left">
+              Team Leader, Commercial Real Estate Underwriting Intern
+            </div>
+            <div class="item-sub-right">Aug 2025 – Present</div>
+          </div>
+          <ul>
+            <li>
+              Led a 5-member underwriting team in developing 2–3 new financial
+              models, implementing structure, accountability, and performance
+              systems that improved collaboration and delivery speed
+            </li>
+            <li>
+              Recommended 5–10 high-yield properties using new models, resulting
+              in a $1M acquisition
+            </li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <div class="item-left">Aptive Pest Control</div>
+            <div class="item-right">Chicago, IL</div>
+          </div>
+          <div class="item-sub">
+            <div class="item-sub-left">Sales Representative</div>
+            <div class="item-sub-right">Jun 2024 – Aug 2024</div>
+          </div>
+          <ul>
+            <li>
+              Generated $125K in revenue within 3 months through door-to-door
+              sales, ranking among the top sales reps
+            </li>
+            <li>
+              Reduced company travel costs by optimizing technician routing and
+              scheduling
+            </li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <div class="item-left">Vivint Smart Home</div>
+            <div class="item-right">Provo, UT</div>
+          </div>
+          <div class="item-sub">
+            <div class="item-sub-left">Solar Closer</div>
+            <div class="item-sub-right">Oct 2023 – Feb 2024</div>
+          </div>
+          <ul>
+            <li>
+              Increased company revenue by closing solar contracts with existing
+              Vivint Smart Home clients through outbound sales
+            </li>
+            <li>
+              Ranked among the top 3 closers company-wide for 5 consecutive
+              months
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEADERSHIP & SERVICE -->
+    <section class="section">
+      <h2 class="section-title">Leadership &amp; Service</h2>
+      <div class="section-body">
+        <div class="item">
+          <div class="item-header">
+            <div class="item-left">A Hope Company</div>
+            <div class="item-right">Salt Lake City, UT</div>
+          </div>
+          <div class="item-sub">
+            <div class="item-sub-left">Founder</div>
+            <div class="item-sub-right">Sept 2024 – Present</div>
+          </div>
+          <ul>
+            <li>
+              Launched a non-profit organization to provide resources and
+              support for local homeless populations
+            </li>
+            <li>
+              Collected 1,300+ care packages in 12 months and delivered them to
+              displaced families in Utah County, Cache County, and Salt Lake
+              County
+            </li>
+            <li>
+              Built partnerships with local businesses and civic leaders,
+              doubling donations and community reach
+            </li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <div class="item-left">
+              The Church of Jesus Christ of Latter-day Saints
+            </div>
+            <div class="item-right">Berlin, Germany</div>
+          </div>
+          <div class="item-sub">
+            <div class="item-sub-left">Volunteer Representative</div>
+            <div class="item-sub-right">April 2020 – March 2022</div>
+          </div>
+          <ul>
+            <li>
+              Supervised, trained, and mentored teams of up to 200 missionaries,
+              implementing structured goal-setting and coaching programs that
+              elevated productivity and unity
+            </li>
+            <li>
+              Organized community service initiatives that strengthened local
+              relationships and public goodwill
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- AWARDS, SKILLS & INTERESTS -->
+    <section class="section">
+      <h2 class="section-title">Awards, Skills &amp; Interests</h2>
+      <div class="section-body">
+        <ul class="skills-list">
+          <li>Certified in Leadership Principles, Harvard Business School Online</li>
+          <li>Certified Nursing Assistant (Dec 2024), ccCNA</li>
+          <li>Microsoft Excel (Associate Certification), experience in Tableau</li>
+          <li>
+            Hobbies: snowboarding, boxing, community service, weightlifting, traveling
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
